@@ -2,6 +2,52 @@
 master分支将保留一周，后续app分支将替换为master 
 
 
+## 与新版的darknet不兼容，有一些bug需要处理，暂时放弃
+
+## 相关文件说明
+```
+.
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── app.py   运行入口
+├── apphelper
+├── application
+├── config.py  配置文件， 切换使用的模型
+├── crnn
+├── darknet
+├── docker.sh
+├── model.py
+├── models
+├── post-demo.py
+├── requirements.txt
+├── setup-cpu.md
+├── setup.md
+├── static
+├── templates
+├── test
+├── test.ipynb
+├── text
+├── tools
+├── train
+└── venv
+```
+
+# 相关模型文件
+.
+├── Angle-model.pb
+├── Angle-model.pbtxt
+├── README.md
+├── ocr-dense-keras.h5   
+├── ocr-dense.pth
+├── ocr-english.pth
+├── ocr-lstm.pth
+├── text.cfg
+├── text.data
+├── text.h5
+├── text.names
+└── text.weights
+
 # 实现功能
 - [x]  文字方向检测 0、90、180、270度检测（支持dnn/tensorflow） 
 - [x]  支持(darknet/opencv dnn /keras)文字检测,支持darknet/keras训练
@@ -30,8 +76,7 @@ mv darknet chineseocr/
 make 
 ```
 
-修改 darknet/python/darknet.py line 48    
-root = '/root/'##chineseocr所在目录     
+注意需要修改 darknet/python/darknet.py 中的libdarknet.so路径，就是make后出现的，windows和mac编译出来的也不一样
 lib = CDLL(root+"chineseocr/darknet/libdarknet.so", RTLD_GLOBAL)    
 
 

@@ -7,7 +7,7 @@ from PIL import Image
 from config import yoloCfg,yoloWeights,yoloData,darknetRoot,GPU,GPUID
 os.chdir(darknetRoot)
 sys.path.append('python')
-import darknet as dn
+from darknet import darknet as dn
 
 
 def array_to_image(arr):
@@ -25,7 +25,7 @@ def detect_np(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     num = dn.c_int(0)
     pnum = dn.pointer(num)
     dn.predict_image(net, im)
-    dets = dn.get_network_boxes(net, im.w, im.h, thresh, hier_thresh, None, 0, pnum)
+    dets = dn.get_network_boxes(net, im.w, im.h, thresh, hier_thresh, None, 0, pnum,0)
     num = pnum[0]
     if (nms): dn.do_nms_obj(dets, num, meta.classes, nms)
     res = []
